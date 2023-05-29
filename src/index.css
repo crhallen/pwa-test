@@ -13,10 +13,11 @@ code {
 }
 
 #install-instructions {
-  display: none;
+  display: block;
+  color: red;
 }
-@media (display-mode: browser) {
+@media (display-mode: standalone) {
   #install-instructions {
-    display: block;
+    display: none;
   }
 }

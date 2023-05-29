@@ -1,5 +1,13 @@
+body {
+  min-width: 400px;
+}
+
 .App {
   text-align: center;
+  background-color: #282c34;
+  color: white;
+  font-size: calc(10px + 2vmin);
+  padding-bottom: 60px;
 }
 
 .App-logo {
@@ -14,14 +22,20 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  max-width: 600px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.App-header hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #777;
 }
 
 .App-link {
@@ -35,4 +49,26 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.checklist {
+  text-align: left;
+  max-width: 600px;
+  padding: 0;
+  margin: 0;
+  font-size: calc(8px + 2vmin);
+  width: 100%;
+}
+
+.checklist li {
+  list-style: none;
+}
+
+.checklist li:before {
+  content: '\2610 ';
+  margin-right: 8px;
+}
+
+.checklist li.done:before {
+  content: '\2611 ';
 }

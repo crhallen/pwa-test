@@ -1,32 +1,38 @@
-import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { GetGeolocationButton } from './GetGeolocationButton';
+import { AudioRecording } from './AudioRecording';
+import { PhotoCapture } from './PhotoCapture';
 
 function App() {
+  // store audio blobs to state as an array
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <ul>
-          <li>Test if its easy to install PWA--- (Its clunky on iOS)</li>
-          <li>Test if app can get geolocation--- yep</li>
-          <li>Test if images etc can be saved offline</li>
-          <li>Test if upload can be done in the background</li>
-          <li>Test if its easy for user to get latest from PWA</li>
-        </ul>
         <h3 id="install-instructions">Make sure you install the PWA!</h3>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
         <hr />
         <GetGeolocationButton />
         <hr />
+        <AudioRecording />
+        <hr />
+        <PhotoCapture />
+        <hr />
+        <h3>Todo list</h3>
+        <ul className="checklist">
+          <li>Test if upload can be done in the background</li>
+          <li>Test syncing db</li>
+          <li>Test if its easy for user to get latest version of app</li>
+          <li className="done">
+            Test if its easy to install PWA {'>'} (clunky on iOS)
+          </li>
+          <li className="done">Test if app can get geolocation</li>
+          <li className="done">Test if images can be saved offline</li>
+          <li className="done">
+            Test if audio recordings can be saved offline
+          </li>
+        </ul>
       </header>
     </div>
   );
