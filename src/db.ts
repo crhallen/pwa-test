@@ -12,15 +12,23 @@ export class MyDexie extends Dexie {
   records!: Table<Record>;
 
   constructor() {
-    super('myDatabase');
+    super('StealthNatureDB');
     this.version(1).stores({
       records: '++id', // Primary key and indexed props
     });
     this.records
       .get(99)
-      .then()
+      .then((v) => {
+        if (v) {
+          console.log('99 already there');
+          return;
+        } else {
+          console.log('adding the 99');
+          db.records.put({ id: THE_ENTRY });
+        }
+      })
       .catch((err) => {
-        db.records.put({ id: THE_ENTRY });
+        console.log('failed to get the 99', err);
       });
   }
 }

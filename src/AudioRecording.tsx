@@ -11,7 +11,11 @@ export const AudioRecording = () => {
   }, []);
 
   const handleRecordingComplete = async (audioBlob: Blob) => {
-    await db.records.update(THE_ENTRY, { audioBlob });
+    try {
+      await db.records.update(THE_ENTRY, { audioBlob });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

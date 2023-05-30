@@ -20,7 +20,11 @@ export const PhotoCapture = () => {
     fr.onload = async () => {
       // you can keep blob or save blob to another position
       const photoBlob = new Blob([fr.result as ArrayBuffer]);
-      await db.records.update(THE_ENTRY, { photoBlob });
+      try {
+        await db.records.update(THE_ENTRY, { photoBlob });
+      } catch (err) {
+        console.log(err);
+      }
     };
   };
 
