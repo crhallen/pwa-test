@@ -11,7 +11,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h3 id="install-instructions">Make sure you install the PWA!</h3>
+        <h3 id="install-instructions">
+          You're accessing via the browser. Don't forget to install the PWA
+        </h3>
         <hr />
         <GetGeolocationButton />
         <hr />
@@ -33,6 +35,12 @@ function App() {
             Test if audio recordings can be saved offline
           </li>
         </ul>
+        <button
+          style={{ marginTop: 30 }}
+          onClick={() => window.location.reload()}
+        >
+          Reload
+        </button>
       </header>
     </div>
   );
