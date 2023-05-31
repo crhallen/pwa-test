@@ -14,7 +14,6 @@ function App() {
         <h3 id="install-instructions">
           You're accessing via the browser. Don't forget to install the PWA
         </h3>
-        <p style={{ fontSize: 12 }}>Hash: {process.env.REACT_APP_HASH}</p>
         <hr />
         <GetGeolocationButton />
         <hr />
@@ -36,12 +35,8 @@ function App() {
             Test if audio recordings can be saved offline
           </li>
         </ul>
-        <button
-          style={{ marginTop: 30 }}
-          onClick={() => window.location.reload()}
-        >
-          Reload
-        </button>
+        <p style={{ fontSize: 12 }}>Hash: {process.env.REACT_APP_HASH}</p>
+        <button onClick={() => window.location.reload()}>Reload</button>
       </header>
     </div>
   );

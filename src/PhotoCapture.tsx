@@ -2,13 +2,13 @@ import { THE_ENTRY, db } from './db';
 import { useLiveQuery } from 'dexie-react-hooks';
 
 export const PhotoCapture = () => {
-  const photoUrl = useLiveQuery(async () => {
+  const photoDataUrl = useLiveQuery(async () => {
     const record = await db.records.get(99);
-    console.log('running photoblob live query', record?.photoBlob);
+    console.log('running photoblob live query', record?.photoDataUrl);
 
-    return record?.photoBlob ? URL.createObjectURL(record.photoBlob) : null;
+    return record?.photoDataUrl;
   }, []);
-  console.log('🚀 ~ photoUrl:', photoUrl);
+  console.log('🚀 ~ photoDataUrl:', photoDataUrl);
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -23,12 +23,13 @@ export const PhotoCapture = () => {
     console.log('🚀 ~ file:', file);
 
     const fr = new FileReader();
-    fr.readAsArrayBuffer(file);
+    // TODO - SWITCH TO BLOB, ITS MORE EFFICIENT
+    fr.readAsDataURL(file);
     fr.onload = async () => {
       console.log('🚀 ~ fr.onload');
-      const photoBlob = new Blob([fr.result as ArrayBuffer]);
+      const photoDataUrl = fr.result as string;
       try {
-        await db.records.update(THE_ENTRY, { photoBlob });
+        await db.records.update(THE_ENTRY, { photoDataUrl });
       } catch (err) {
         console.log('failed to save photoblob to db', err);
       }
@@ -48,8 +49,8 @@ export const PhotoCapture = () => {
           onChange={handleChange}
         />
 
-        {photoUrl && (
-          <img src={photoUrl} style={{ width: '100%', maxWidth: 600 }} />
+        {photoDataUrl && (
+          <img src={photoDataUrl} style={{ width: '100%', maxWidth: 600 }} />
         )}
       </div>
     </form>

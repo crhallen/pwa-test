@@ -5,7 +5,7 @@ export const THE_ENTRY = 99;
 export interface Record {
   id?: number;
   audioBlob?: Blob;
-  photoBlob?: Blob;
+  photoDataUrl?: string;
 }
 
 export class MyDexie extends Dexie {
