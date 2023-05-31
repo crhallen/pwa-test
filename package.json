@@ -35,8 +35,8 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "deploy": "export REACT_APP_HASH=$(git rev-parse HEAD) && gh-pages -d build",
+    "start": "export REACT_APP_HASH=$(git rev-parse HEAD) && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

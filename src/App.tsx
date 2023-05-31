@@ -14,6 +14,7 @@ function App() {
         <h3 id="install-instructions">
           You're accessing via the browser. Don't forget to install the PWA
         </h3>
+        <p style={{ fontSize: 12 }}>{process.env.REACT_APP_HASH}</p>
         <hr />
         <GetGeolocationButton />
         <hr />

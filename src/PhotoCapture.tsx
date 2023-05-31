@@ -4,26 +4,33 @@ import { useLiveQuery } from 'dexie-react-hooks';
 export const PhotoCapture = () => {
   const photoUrl = useLiveQuery(async () => {
     const record = await db.records.get(99);
+    console.log('running photoblob live query', record?.photoBlob);
 
     return record?.photoBlob ? URL.createObjectURL(record.photoBlob) : null;
   }, []);
+  console.log('🚀 ~ photoUrl:', photoUrl);
 
-  const handleSubmitCapture = (event: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-    const target = event.target as typeof event.target & {
-      files: FileList;
-    };
+    console.log('called onChange');
+    const target = event.target as HTMLInputElement & { files: FileList };
+
     const file = target.files[0];
+    if (!file) {
+      return;
+    }
+
+    console.log('🚀 ~ file:', file);
 
     const fr = new FileReader();
     fr.readAsArrayBuffer(file);
     fr.onload = async () => {
-      // you can keep blob or save blob to another position
+      console.log('🚀 ~ fr.onload');
       const photoBlob = new Blob([fr.result as ArrayBuffer]);
       try {
         await db.records.update(THE_ENTRY, { photoBlob });
       } catch (err) {
-        console.log(err);
+        console.log('failed to save photoblob to db', err);
       }
     };
   };
@@ -38,7 +45,7 @@ export const PhotoCapture = () => {
           id="imageFile"
           capture="environment"
           accept="image/*"
-          onChangeCapture={handleSubmitCapture}
+          onChange={handleChange}
         />
 
         {photoUrl && (

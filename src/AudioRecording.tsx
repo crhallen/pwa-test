@@ -6,15 +6,17 @@ import { THE_ENTRY, db } from './db';
 export const AudioRecording = () => {
   const audioUrl = useLiveQuery(async () => {
     const record = await db.records.get(THE_ENTRY);
+    console.log('running audioblob live query', record?.audioBlob);
 
     return record?.audioBlob ? URL.createObjectURL(record.audioBlob) : null;
   }, []);
+  console.log('🚀 ~ audioUrl:', audioUrl);
 
   const handleRecordingComplete = async (audioBlob: Blob) => {
     try {
       await db.records.update(THE_ENTRY, { audioBlob });
     } catch (error) {
-      console.log(error);
+      console.log('failed to save audioblob to db', error);
     }
   };
 
